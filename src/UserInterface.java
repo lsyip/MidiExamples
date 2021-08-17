@@ -35,7 +35,7 @@ public class UserInterface extends Application {
         stage.setTitle("MidiPlayer"); //sets window title
         MidiPlayer midiPlayer = new MidiPlayer();
 
-        Label l = new Label("File"); //label to display note name and frequency
+        Label l = new Label("File");
         l.setFont(new Font("Times New Roman", 32));
         l.setTranslateX(50);
         l.setTranslateY(75);

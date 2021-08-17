@@ -9,8 +9,10 @@ public class Driver {
 
         Application.launch(UserInterface.class, args);
 
-        //MidiPlayer midiPlayer = new MidiPlayer();
-        //midiPlayer.setFileName("src/crono.mid");
-        //midiPlayer.playMidiFile();
+        /*
+        MidiPlayer midiPlayer = new MidiPlayer();
+        midiPlayer.setFileName("src/crono.mid");
+        midiPlayer.playMidiFile();
+         */
     }
 }
