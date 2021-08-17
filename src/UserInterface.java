@@ -4,7 +4,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiUnavailableException;
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -26,6 +33,7 @@ public class UserInterface extends Application {
 
     public void start(Stage stage) { //sets up JavaFX GUI
         stage.setTitle("MidiPlayer"); //sets window title
+        MidiPlayer midiPlayer = new MidiPlayer();
 
         Label l = new Label("File"); //label to display note name and frequency
         l.setFont(new Font("Times New Roman", 32));
@@ -45,8 +53,28 @@ public class UserInterface extends Application {
 
         //TODO: Event Handlers for buttons
         fileSelect.setOnAction(actionEvent -> {  //EventHandler replaced with lambda
-            l.setText("Select a file"); //placeholder
+
+            final FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select midi file");
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            if (selectedFile != null) {
+                l.setText(selectedFile.toString());
+                midiPlayer.setFileName(selectedFile.toString());
+            }
+
         });
+
+        // Play button
+        play.setOnAction(actionEvent -> {
+            try {
+                midiPlayer.playMidiFile();
+            } catch (MidiUnavailableException | InvalidMidiDataException | IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Stop button
+        stop.setOnAction(actionEvent -> midiPlayer.stopPlayback());
 
 
 
